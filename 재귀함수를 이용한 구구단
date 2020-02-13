@@ -1,0 +1,25 @@
+package com.hk.exam.test;
+
+public class GuguDan {
+	static void gob(int a, int b) {
+		b++;
+		if (b < 10) {
+			System.out.printf(" %d x %d = %d\n", a, b, a * b);
+			gob(a, b);
+		}
+	}
+
+	static void dan(int a) {
+		a++;
+		if (a < 10) {
+			gob(a, 0);
+			System.out.println();
+			dan(a);
+		}
+	}
+
+	public static void main(String[] args) {
+		System.out.printf("   구구단\n");
+		dan(1);
+	}
+}
