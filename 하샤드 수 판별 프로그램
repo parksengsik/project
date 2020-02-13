@@ -1,0 +1,28 @@
+/* 양의 정수 x가 하샤드 수 이려면, x의 자릿수의 합으로 x가 나누어져야한다.
+ * 예를 들어, 18의 자릿수의 합은 1+8=9이고 18은 9로 나누어 떨어지므로
+ * 하샤드의 수입니다. 자연수 x를 입력받아 x가 하샤드 수인지 아닌지 판별하는
+ * solution을 완성하라. */
+
+
+package com.hk.exam.study;
+
+import java.util.Scanner;
+
+public class Hashad {
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		System.out.print("숫자를 입력하시오 : ");
+		int arr = scan.nextInt();
+		int arrCopy = arr;
+		int sum = 0;
+		int num = 0;
+		for (int i = 10000; i >= 1; i = i / 10) {
+			num = arrCopy / i; 
+			arrCopy -= (i * num);
+			sum += num;
+		}
+		System.out.println("자릿수 합 : " + sum);
+		System.out.println("결과 : " + (arr % sum == 0));
+		scan.close();
+	}
+}
