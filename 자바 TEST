@@ -1,0 +1,168 @@
+# 1.수행형 과제
+
+## [주제1] : 오버로딩
+
+### 내용 설명 및 요약
+* 오버로딩의 뜻
+- 오버로딩의 사전적 의미는 '과적하다.' 즉  많이 싣는 것을 뜻한다. 보통 
+  하나의 메서드 이름에 하나의 기능만을 구현해야하는데 , 하나의 메서드 
+  이름으로 여러기능을 구현하기 때문에 붙여진 이름이라 생각할 수 있다.
+* 오버로딩의 조건 
+- 메서드 이름이 같아야 한다.
+- 매개변수의 개수 또는 타입이 달라야한다.
+* 오버로딩의 장점 
+- 이름만 기억하면 되므로 기억하기 쉽고 이름도 짧게 할수 있어서 오류 가능성이
+  적어진다.
+- 메서드의 이름이 같으므로 기능을 예측 할 수있다.  
+- 메서드의 이름을 절약 할 수 있다. 
+* 가변인자
+- 가변인자: 기존에는 메서드의 매개변수 개수가 고정적이었으나 JDK1.5부터 동적으로 
+           지정해줄 수 있게 되었으며, 이 기능을 맗한다.
+- 선언 방식은 '타입 ... 변수명'으로 선언되어진다.
+  Ex) public void sum(int... a){...}
+### 예제코드
+```java
+   package com.hk.exam;
+
+    public class Ex {
+      int sum(int a,int b) {
+        return a+b;
+      }
+      double sum(int a,double b) {
+        return a+b;
+      }
+      double sum(double a,double b) {
+        return a+b;
+      }
+      double sum(double a,int b) {
+        return a+b;
+      }
+      double sum(double... a) {
+        return a[0]+a[1];
+      }
+    }
+```
+### 코드에 대한 설명
+* 위에 int sum은 int형인 a,b를 리턴해주는 양식이고 밑으로 내려갈수록 같은 이름의 
+  메소드로 하면서 받아오는 변수를 바꾸어 주면서 오버로딩을 행해지고 있다.
+  마지막에는 가변인자를 사용해 2가지의 변수를 받아서 두개의 값을 더해지도록 하였다.
+
+## [주제2] : 생성자
+
+### 내용 설명 및 요약
+* 생성자 란?
+- 인스턴스가 생성될때 호출되는 '인스턴스 초기화 메서드'이다. 주로 초기화 작업에서
+  많이 사용 된다.
+* 생성자의 조건 
+- 생성자의 이름은 클래스의 이름과 같아야 한다.
+- 생성자는 리턴 값이 없다.
+* 기본 생성자
+- 지금까지 클래스에 생성자를 정의하지 않고도 인스턴스를 생성할 수 있었던 이유는 
+  컴파일러가 제공하는 '기본 생성자'덕분이다.
+- 기본생성자가 컴파일러에 의해서 추가되는 경우는 클래스에 정의된 생성자가 하나도
+  없을때 뿐이다.
+* 매개변수가 있는 생성자
+- 생성자도 메서드 처럼 매개변수를 선언하여 호출 시 값을 넘겨 받아서 인스턴스의 
+  초기화 작업에 사용할 수 있다. 인스턴스 마다 각기 다른 값으로 초기화되어야하는
+  경우가 많기 때문에 매개변수를 사용한 초기화가 매우 유용하다.
+* 생성자에서 다른 생성자 호출하기-this(), this
+- 조건 : 생성자의 이름으로 클래스이른 대신 this를 사용한다.
+         한 생성자에서 다른 생성자를 호출할 때는 반드시 첫줄에서만 호출이 가능 하다.
+- this : 인스턴스 자신을 가리키는 참조변수, 인스턴스의 주소가 저장되어 있다.
+         모든 인스턴스메서드에 지역변수로 숨겨진 채로 존재한다.
+- this() : 생성자, 같은 클래스의 다른 생성자를 호출할 때 사용한다.
+
+### 예제코드
+```java
+   package com.hk.exam;
+
+class Tv{
+	String color;
+	int inchi;
+	char hdmi;
+	
+	Tv(){
+		this("red",40,'O');
+	}
+	
+	Tv(String string, int i, char c) {
+		this.color = string;
+		this.inchi = i;
+		this.hdmi = c;
+	}
+}
+public class Ex {
+	public static void main(String[] args) {
+	Tv tv = new Tv();
+	System.out.println(tv.color);
+	System.out.println(tv.hdmi);
+	System.out.println(tv.inchi);
+	}
+	
+}
+```
+### 코드에 대한 설명
+* 위의 코드는 TV를 생성자로 하여금 프로그래밍한 코드이다. 먼저 클래스 Tv를 만들고
+  안에 생성자를 만들어 오버로딩하여 매개변수를 설정한 다른 생성자를 만들어 this()를
+  사용하여 그 값을 매개변수에 넣어주고 this.을 활용하여 클래스 변수에 넣어주었다.
+  실행 결과 색깔 및 HDMI 유무와 인치가 출력되게된다.
+
+## [주제3] : 상속
+
+### 내용 설명 및 요약
+* 정의
+- 기존의 클래스를 재사용하여 새로운 클래스를 작성하는 것을 말한다. 클래스는 조상 클래스와 
+  자식 클래스로 나뉘어 진다.
+* 장점
+- 코드 재사용성을 높인다.
+- 코드 중복이 사라지게 된다.
+- 프로그램 생산성과 유지보수가 높아진다.
+* 형식
+- 클래스 클래스이름 extends 조상클래스의 이름
+* 키워드가 Extends인 이유
+- 생성자와 초기화 블럭은 상속 되지 않는다. 멤버만 상속된다.
+- 자손클래스의 멤버 개수는 조상 클래스보다 항상 같거나 많아야 한다.
+* 클래스간의 관계에서는 포함관계도 있다. 포함관계는 클래스 간의 포함관계를 맺어 줌으로서 한클래스의
+  멤버 변수로 다른 클래스 타입의 참조변수를 선언한다는 뜻이다.
+* 자바에서의 상속은 단일 상속만이 가능하다.
+
+### 예제코드
+```java
+package com.hk.exam;
+
+class Tv{
+	String color;
+	int inchi;
+	char hdmi;
+	
+	Tv(){
+		this("red",40,'O');
+	}
+	
+	Tv(String string, int i, char c) {
+		this.color = string;
+		this.inchi = i;
+		this.hdmi = c;
+	}
+}
+class LgTv extends Tv{
+	String product = "LG";
+}
+public class Ex {
+	public static void main(String[] args) {
+	LgTv tv = new LgTv();
+	System.out.println(tv.product);
+	System.out.println(tv.color);
+	System.out.println(tv.hdmi);
+	System.out.println(tv.inchi);
+	}
+	
+}
+```
+### 코드에 대한 설명
+* 위의 코드는 TV클래스를 상속하여 LGTV클래스라는 자식클래스를 드는 프로그램이다.
+  LgTv 클래스는 기존의 부모클래스인 Tv클래스를 상속 되어짐으로서 Tv클래스의 
+  매개변수및 메소드를 받아오고 거기서 Product라는 변수에 LG란 값을 넣고 출력을 
+  했을때 기존은 색깔, HDMI유무, 인치는 Tv클래스의 값을 불러오고 Product는 
+  Lgtv클래스의 값을 받아오게 된다.
+  
